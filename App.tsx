@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import { HashRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, useLocation, Navigate, useParams, matchPath } from 'react-router-dom';
 import { Menu, X, Box, ChevronRight, ChevronDown, Globe } from 'lucide-react';
 import { getCourseData } from './data';
 import { Part, Section, Language } from './types';
@@ -77,21 +77,20 @@ const Sidebar = ({
 
 // Section View Component
 const SectionView = () => {
-  const { pathname } = useLocation();
+  const { id } = useParams();
   const { lang } = useContext(LanguageContext);
-  const sectionId = pathname.split('/section/')[1];
   
   const courseData = getCourseData(lang);
 
   // Flatten data to find current section
   const allSections = courseData.flatMap(p => p.sections);
-  const currentSection = allSections.find(s => s.id === sectionId);
+  const currentSection = allSections.find(s => s.id === id);
   
   // Find Parent Part
-  const parentPart = courseData.find(p => p.sections.some(s => s.id === sectionId));
+  const parentPart = courseData.find(p => p.sections.some(s => s.id === id));
 
   // Navigation Logic
-  const currentIndex = allSections.findIndex(s => s.id === sectionId);
+  const currentIndex = allSections.findIndex(s => s.id === id);
   const prevSection = currentIndex > 0 ? allSections[currentIndex - 1] : null;
   const nextSection = currentIndex < allSections.length - 1 ? allSections[currentIndex + 1] : null;
 
@@ -154,9 +153,12 @@ const SectionView = () => {
 const Layout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { pathname } = useLocation();
-  const sectionId = pathname.split('/section/')[1] || '';
   const { lang, toggleLang } = useContext(LanguageContext);
   const data = getCourseData(lang);
+
+  // Use matchPath for robust section detection
+  const match = matchPath('/section/:id', pathname);
+  const sectionId = match?.params.id || '';
 
   // Scroll to top on route change
   useEffect(() => {
@@ -194,10 +196,14 @@ const Layout = () => {
           <div className="ml-auto flex items-center">
             <button 
               onClick={toggleLang} 
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-700 hover:border-indigo-500 transition text-slate-300 text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-700 hover:border-indigo-500 transition group"
             >
-              <Globe className="w-4 h-4 text-indigo-400" />
-              <span>{lang === 'es' ? 'ES' : 'EN'}</span>
+              <Globe className="w-4 h-4 text-slate-500 group-hover:text-indigo-400 transition-colors" />
+              <div className="flex items-center gap-1.5 text-xs font-bold font-mono">
+                 <span className={`${lang === 'es' ? 'text-white' : 'text-slate-600'}`}>ES</span>
+                 <span className="text-slate-700">|</span>
+                 <span className={`${lang === 'en' ? 'text-white' : 'text-slate-600'}`}>EN</span>
+              </div>
             </button>
           </div>
         </header>
