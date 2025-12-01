@@ -9,7 +9,7 @@ interface LanguageContextType {
   lang: Language;
   toggleLang: () => void;
 }
-const LanguageContext = createContext<LanguageContextType>({ lang: 'es', toggleLang: () => {} });
+const LanguageContext = createContext<LanguageContextType>({ lang: 'en', toggleLang: () => {} });
 
 // Sidebar Component
 const Sidebar = ({ 
@@ -220,7 +220,7 @@ const Layout = () => {
 };
 
 export default function App() {
-  const [lang, setLang] = useState<Language>('es');
+  const [lang, setLang] = useState<Language>('en');
   
   const toggleLang = () => {
     setLang(prev => prev === 'es' ? 'en' : 'es');

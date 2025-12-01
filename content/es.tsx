@@ -958,7 +958,16 @@ export const esContent: Part[] = [
               <ul className="list-disc pl-5 space-y-2">
                 <li><strong className="text-white">Luma AI / Polycam:</strong> Apps móviles para capturar y entrenar en la nube.</li>
                 <li><strong className="text-white">gSplat (NerfStudio):</strong> Librería open-source para investigadores.</li>
-                <li><strong className="text-white">SuperSplat / Viser:</strong> Visualizadores web para archivos .ply.</li>
+                <li>
+                  <strong className="text-white">
+                    <a href="https://superspl.at" target="_blank" rel="noreferrer" className="underline decoration-indigo-500 hover:text-indigo-400">SuperSplat</a> / Viser:
+                  </strong> Visualizadores web para archivos .ply.
+                </li>
+                <li>
+                  <strong className="text-white">
+                    <a href="https://lichtfeld.io" target="_blank" rel="noreferrer" className="underline decoration-indigo-500 hover:text-indigo-400">Lichtfeld</a>:
+                  </strong> Plataforma profesional para gestión y visualización de Gaussian Splats.
+                </li>
               </ul>
             )
           }

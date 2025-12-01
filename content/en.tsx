@@ -951,7 +951,16 @@ export const enContent: Part[] = [
               <ul className="list-disc pl-5 space-y-2">
                 <li><strong className="text-white">Luma AI / Polycam:</strong> Mobile apps to capture and train in the cloud.</li>
                 <li><strong className="text-white">gSplat (NerfStudio):</strong> Open-source library for researchers.</li>
-                <li><strong className="text-white">SuperSplat / Viser:</strong> Web viewers for .ply files.</li>
+                <li>
+                  <strong className="text-white">
+                    <a href="https://superspl.at" target="_blank" rel="noreferrer" className="underline decoration-indigo-500 hover:text-indigo-400">SuperSplat</a> / Viser:
+                  </strong> Web viewers for .ply files.
+                </li>
+                 <li>
+                  <strong className="text-white">
+                    <a href="https://lichtfeld.io" target="_blank" rel="noreferrer" className="underline decoration-indigo-500 hover:text-indigo-400">Lichtfeld</a>:
+                  </strong> Professional platform for Gaussian Splat management and visualization.
+                </li>
               </ul>
             )
           }
